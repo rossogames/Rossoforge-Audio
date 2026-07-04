@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <td><img src="https://github.com/rossogames/Rossoforge-Audio/blob/master/logo.png?raw=true" alt="Rossoforge" width="64"/></td>
+    <td><img src="https://github.com/rossogames/Rossoforge-Audio/blob/main/logo.png?raw=true" alt="Rossoforge" width="64"/></td>
     <td><h2>Rossoforge - Audio</h2></td>
   </tr>
 </table>
