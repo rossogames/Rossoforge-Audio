@@ -8,14 +8,14 @@ namespace Rossoforge.Audio.Data
     public class AudioChannelData : ScriptableObject, IAudioChannelData
     {
         public event Action<float> OnVolumeChanged;
-        public event Action<bool> OnActiveChanged;
+        public event Action<bool> OnMutedChanged;
 
         [field: Range(0f, 1f)]
         [field: SerializeField]
         public float Volume { get; private set; }
 
         [field: SerializeField]
-        public bool IsActive { get; private set; }
+        public bool IsMuted { get; private set; }
 
         public void SetVolume(float newVolume)
         {
@@ -25,20 +25,16 @@ namespace Rossoforge.Audio.Data
                 return;
 
             Volume = newVolume;
-
-            if (!IsActive)
-                return;
-
             OnVolumeChanged?.Invoke(Volume);
         }
 
-        public void SetActive(bool active)
+        public void SetMute(bool isMuted)
         {
-            if (IsActive == active)
+            if (IsMuted == isMuted)
                 return;
 
-            IsActive = active;
-            OnActiveChanged?.Invoke(active);
+            IsMuted = isMuted;
+            OnMutedChanged?.Invoke(isMuted);
         }
     }
 }

@@ -28,15 +28,15 @@ namespace Rossoforge.Audio.Services
             channel.SetVolume(volume);
         }
 
-        public void SetChannelActive(IAudioChannelData channel, bool isActive)
+        public void SetChannelMute(IAudioChannelData channel, bool isMuted)
         {
             if (channel == null)
             {
-                RossoLogger.Error($"{nameof(SetChannelActive)}: channel is null");
+                RossoLogger.Error($"{nameof(SetChannelMute)}: channel is null");
                 return;
             }
 
-            channel.SetActive(isActive);
+            channel.SetMute(isMuted);
         }
     }
 }
