@@ -16,6 +16,7 @@ namespace Rossoforge.Audio.Components
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+            _audioSource.playOnAwake = false;
         }
 
         private void OnEnable()
@@ -98,7 +99,6 @@ namespace Rossoforge.Audio.Components
         private void SetLoop() => _audioSource.loop = _configData.Main.Loop;
         private void AutoPlay()
         {
-            _audioSource.playOnAwake = false;
             if (_configData.Main.Autoplay)
                 _audioSource.Play();
         }
@@ -110,7 +110,15 @@ namespace Rossoforge.Audio.Components
         private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.Spatial.DopplerLevel;
         private void SetSpread() => _audioSource.spread = _configData.Spatial.Spread;
         private void SetVolumeRolloff() => _audioSource.rolloffMode = _configData.Spatial.VolumeRolloff;
-        private void SetMinDistance() => _audioSource.minDistance = _configData.Spatial.MinDistance;
+        private void SetMinDistance()
+        {
+            if (_configData.Spatial.MinDistance > _configData.Spatial.MaxDistance)
+            {
+                RossoLogger.Error($"AudioConfigData '{_configData.name}': Min Distance must be less than Max Distance.");
+                return;
+            }
+            _audioSource.minDistance = _configData.Spatial.MinDistance;
+        }
         private void SetMaxDistance() => _audioSource.maxDistance = _configData.Spatial.MaxDistance;
 
         //--Bypass Settings--
