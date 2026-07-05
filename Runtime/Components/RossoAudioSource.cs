@@ -32,40 +32,39 @@ namespace Rossoforge.Audio.Components
             if (_configData == null)
                 return;
 
-            _currentChannel = _configData.Channel;
-            if (_currentChannel == null)
-            {
-                RossoLogger.Error($"AudioConfigData '{_configData.name}' missing required AudioChannelData reference on GameObject '{gameObject.name}'.");
+            //--default--
+            if (!SetChannel())
                 return;
-            }
 
-            SetClip();
             SetMixerGroup();
-
             SetPriority();
+
+            //--main--
+            SetClip();
             SetVolume(_currentChannel.Volume);
             SetPitch();
-            SetStereoPan();
-            SetSpatialBlend();
-            SetReverbZoneMix();
-
             SetMuteState(_currentChannel.IsMuted);
-            SetBypassEffects();
-            SetBypassListenerEffects();
-            SetBypassReverbZones();
             SetLoop();
-
-            SetDopplerLevel();
-            SetSpread();
-            SetRolloffMode();
-            SetMinDistance();
-            SetMaxDistance();
 
             _currentChannel.OnVolumeChanged += SetVolume;
             _currentChannel.OnMutedChanged += SetMuteState;
 
-            if (_configData.Autoplay)
-                _audioSource.Play();
+            //--Spatial Settings--
+            SetSpatialBlend();
+            SetStereoPan();
+            SetReverbZoneMix();
+            SetDopplerLevel();
+            SetSpread();
+            SetVolumeRolloff();
+            SetMinDistance();
+            SetMaxDistance();
+
+            //--Bypass Settings--
+            SetBypassEffects();
+            SetBypassListenerEffects();
+            SetBypassReverbZones();
+
+            AutoPlay();
         }
         private void Cleanup()
         {
@@ -76,25 +75,47 @@ namespace Rossoforge.Audio.Components
             _currentChannel.OnMutedChanged -= SetMuteState;
         }
 
-        private void SetClip() => _audioSource.clip = _configData.Clip;
+        //--default--
+        private bool SetChannel()
+        {
+            _currentChannel = _configData.Channel;
+            if (_currentChannel == null)
+            {
+                RossoLogger.Error($"AudioConfigData '{_configData.name}' missing required AudioChannelData reference on GameObject '{gameObject.name}'.");
+                return false;
+            }
+
+            return true;
+        }
         private void SetMixerGroup() => _audioSource.outputAudioMixerGroup = _configData.MixerGroup;
         private void SetPriority() => _audioSource.priority = _configData.Priority;
-        private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Volume * channelVolume;
-        private void SetPitch() => _audioSource.pitch = _configData.Pitch;
-        private void SetStereoPan() => _audioSource.panStereo = _configData.StereoPan;
-        private void SetSpatialBlend() => _audioSource.spatialBlend = _configData.SpatialBlend;
-        private void SetReverbZoneMix() => _audioSource.reverbZoneMix = _configData.ReverbZoneMix;
 
-        private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Mute || isMuted;
-        private void SetBypassEffects() => _audioSource.bypassEffects = _configData.BypassEffects;
-        private void SetBypassListenerEffects() => _audioSource.bypassListenerEffects = _configData.BypassListenerEffects;
-        private void SetBypassReverbZones() => _audioSource.bypassReverbZones = _configData.BypassReverbZones;
-        private void SetLoop() => _audioSource.loop = _configData.Loop;
+        //--main--
+        private void SetClip() => _audioSource.clip = _configData.Main.Clip;
+        private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Main.Volume * channelVolume;
+        private void SetPitch() => _audioSource.pitch = _configData.Main.Pitch;
+        private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Main.Mute || isMuted;
+        private void SetLoop() => _audioSource.loop = _configData.Main.Loop;
+        private void AutoPlay()
+        {
+            _audioSource.playOnAwake = false;
+            if (_configData.Main.Autoplay)
+                _audioSource.Play();
+        }
 
-        private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.DopplerLevel;
-        private void SetSpread() => _audioSource.spread = _configData.Spread;
-        private void SetRolloffMode() => _audioSource.rolloffMode = _configData.VolumeRolloff;
-        private void SetMinDistance() => _audioSource.minDistance = _configData.MinDistance;
-        private void SetMaxDistance() => _audioSource.maxDistance = _configData.MaxDistance;
+        //--Spatial Settings--
+        private void SetSpatialBlend() => _audioSource.spatialBlend = _configData.Spatial.SpatialBlend;
+        private void SetStereoPan() => _audioSource.panStereo = _configData.Spatial.StereoPan;
+        private void SetReverbZoneMix() => _audioSource.reverbZoneMix = _configData.Spatial.ReverbZoneMix;
+        private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.Spatial.DopplerLevel;
+        private void SetSpread() => _audioSource.spread = _configData.Spatial.Spread;
+        private void SetVolumeRolloff() => _audioSource.rolloffMode = _configData.Spatial.VolumeRolloff;
+        private void SetMinDistance() => _audioSource.minDistance = _configData.Spatial.MinDistance;
+        private void SetMaxDistance() => _audioSource.maxDistance = _configData.Spatial.MaxDistance;
+
+        //--Bypass Settings--
+        private void SetBypassEffects() => _audioSource.bypassEffects = _configData.Bypass.Effects;
+        private void SetBypassListenerEffects() => _audioSource.bypassListenerEffects = _configData.Bypass.ListenerEffects;
+        private void SetBypassReverbZones() => _audioSource.bypassReverbZones = _configData.Bypass.ReverbZones;
     }
 }
