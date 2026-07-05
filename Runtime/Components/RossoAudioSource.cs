@@ -57,8 +57,8 @@ namespace Rossoforge.Audio.Components
             SetDopplerLevel();
             SetSpread();
             SetRolloffMode();
-            SetMinDistance();
             SetMaxDistance();
+            SetMinDistance();
 
             //--Bypass Settings--
             SetBypassEffects();
@@ -109,7 +109,18 @@ namespace Rossoforge.Audio.Components
         private void SetReverbZoneMix() => _audioSource.reverbZoneMix = _configData.Spatial.ReverbZoneMix;
         private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.Spatial.DopplerLevel;
         private void SetSpread() => _audioSource.spread = _configData.Spatial.Spread;
-        private void SetRolloffMode() => _audioSource.rolloffMode = _configData.Spatial.RolloffMode;
+        private void SetRolloffMode()
+        {
+            if (_configData.Spatial.RolloffMode == AudioRolloffMode.Custom)
+            {
+                RossoLogger.Warning($"AudioConfigData '{_configData.name}': Custom Rolloff mode is not supported without curves. Falling back to Logarithmic.");
+                _audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+            }
+            else
+            {
+                _audioSource.rolloffMode = _configData.Spatial.RolloffMode;
+            }
+        }
         private void SetMinDistance()
         {
             if (_configData.Spatial.MinDistance > _configData.Spatial.MaxDistance)
