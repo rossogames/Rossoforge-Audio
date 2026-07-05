@@ -9,6 +9,7 @@ namespace Rossoforge.Audio.Components
     {
         [SerializeField]
         private AudioConfigData _configData;
+        private AudioConfigData _lastAppliedConfig;
 
         private AudioSource _audioSource;
         private AudioChannelData _currentChannel;
@@ -25,12 +26,15 @@ namespace Rossoforge.Audio.Components
         }
         private void OnDisable()
         {
-            Cleanup();
+            UnregisterEvents();
         }
 
         private void Initialize()
         {
             if (_configData == null)
+                return;
+
+            if (CheckCurrentConfig())
                 return;
 
             //--default--
@@ -46,9 +50,7 @@ namespace Rossoforge.Audio.Components
             SetPitch();
             SetMuteState(_currentChannel.IsMuted);
             SetLoop();
-
-            _currentChannel.OnVolumeChanged += SetVolume;
-            _currentChannel.OnMutedChanged += SetMuteState;
+            RegisterEvents();
 
             //--Spatial Settings--
             SetSpatialBlend();
@@ -66,14 +68,21 @@ namespace Rossoforge.Audio.Components
             SetBypassReverbZones();
 
             AutoPlay();
-        }
-        private void Cleanup()
-        {
-            if (_currentChannel == null)
-                return;
 
-            _currentChannel.OnVolumeChanged -= SetVolume;
-            _currentChannel.OnMutedChanged -= SetMuteState;
+            _lastAppliedConfig = _configData;
+        }
+
+        private bool CheckCurrentConfig()
+        {
+            if (_configData == _lastAppliedConfig && _currentChannel != null)
+            {
+                SetVolume(_currentChannel.Volume);
+                SetMuteState(_currentChannel.IsMuted);
+                RegisterEvents();
+                AutoPlay();
+                return true;
+            }
+            return false;
         }
 
         //--default--
@@ -97,6 +106,16 @@ namespace Rossoforge.Audio.Components
         private void SetPitch() => _audioSource.pitch = _configData.Main.Pitch;
         private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Main.Mute || isMuted;
         private void SetLoop() => _audioSource.loop = _configData.Main.Loop;
+        private void RegisterEvents()
+        {
+            _currentChannel.OnVolumeChanged += SetVolume;
+            _currentChannel.OnMutedChanged += SetMuteState;
+        }
+        private void UnregisterEvents()
+        {
+            _currentChannel.OnVolumeChanged -= SetVolume;
+            _currentChannel.OnMutedChanged -= SetMuteState;
+        }
         private void AutoPlay()
         {
             if (_configData.Main.Autoplay)
