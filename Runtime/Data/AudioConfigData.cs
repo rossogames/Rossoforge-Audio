@@ -1,16 +1,20 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Rossoforge.Audio.Data
 {
     [CreateAssetMenu(fileName = nameof(AudioConfigData), menuName = "Rossoforge/Audio/Audio Config Data")]
     public class AudioConfigData : ScriptableObject
     {
-        [field: SerializeField] 
+        [field: SerializeField]
         public AudioChannelData Channel { get; private set; }
 
         [field: SerializeField]
         public AudioClip Clip { get; private set; }
+
+        [field: SerializeField]
+        public AudioMixerGroup MixerGroup { get; private set; }
 
         [field: Range(0, 256)]
         [field: SerializeField]
@@ -53,5 +57,22 @@ namespace Rossoforge.Audio.Data
 
         [field: SerializeField]
         public bool Autoplay { get; private set; } = false;
+
+        [field: Range(0f, 5f)]
+        [field: SerializeField]
+        public float DopplerLevel { get; private set; } = 1f;
+
+        [field: Range(0f, 360f)]
+        [field: SerializeField]
+        public float Spread { get; private set; } = 0f;
+
+        [field: SerializeField]
+        public AudioRolloffMode VolumeRolloff { get; set; }
+
+        [field: SerializeField]
+        public float MinDistance { get; private set; } = 1f;
+
+        [field: SerializeField]
+        public float MaxDistance { get; private set; } = 500f;
     }
 }

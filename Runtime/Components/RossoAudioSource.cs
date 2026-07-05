@@ -40,6 +40,7 @@ namespace Rossoforge.Audio.Components
             }
 
             SetClip();
+            SetMixerGroup();
 
             SetPriority();
             SetVolume(_currentChannel.Volume);
@@ -54,6 +55,12 @@ namespace Rossoforge.Audio.Components
             SetBypassReverbZones();
             SetLoop();
 
+            SetDopplerLevel();
+            SetSpread();
+            SetRolloffMode();
+            SetMinDistance();
+            SetMaxDistance();
+
             _currentChannel.OnVolumeChanged += SetVolume;
             _currentChannel.OnMutedChanged += SetMuteState;
 
@@ -67,9 +74,10 @@ namespace Rossoforge.Audio.Components
 
             _currentChannel.OnVolumeChanged -= SetVolume;
             _currentChannel.OnMutedChanged -= SetMuteState;
-        }       
+        }
 
         private void SetClip() => _audioSource.clip = _configData.Clip;
+        private void SetMixerGroup() => _audioSource.outputAudioMixerGroup = _configData.MixerGroup;
         private void SetPriority() => _audioSource.priority = _configData.Priority;
         private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Volume * channelVolume;
         private void SetPitch() => _audioSource.pitch = _configData.Pitch;
@@ -82,5 +90,11 @@ namespace Rossoforge.Audio.Components
         private void SetBypassListenerEffects() => _audioSource.bypassListenerEffects = _configData.BypassListenerEffects;
         private void SetBypassReverbZones() => _audioSource.bypassReverbZones = _configData.BypassReverbZones;
         private void SetLoop() => _audioSource.loop = _configData.Loop;
+
+        private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.DopplerLevel;
+        private void SetSpread() => _audioSource.spread = _configData.Spread;
+        private void SetRolloffMode() => _audioSource.rolloffMode = _configData.VolumeRolloff;
+        private void SetMinDistance() => _audioSource.minDistance = _configData.MinDistance;
+        private void SetMaxDistance() => _audioSource.maxDistance = _configData.MaxDistance;
     }
 }
