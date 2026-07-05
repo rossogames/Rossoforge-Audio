@@ -27,23 +27,10 @@ namespace Rossoforge.Audio.Components
             Cleanup();
         }
 
-        private void UpdateVolume(float channelVolume)
-        {
-            _audioSource.volume = _configData.BaseVolume * channelVolume;
-        }
-        private void UpdateMuteState(bool isMuted)
-        {
-            _audioSource.mute = isMuted;
-        }
-
         private void Initialize()
         {
             if (_configData == null)
                 return;
-
-            _audioSource.clip = _configData.Clip;
-            _audioSource.loop = _configData.Loop;
-            _audioSource.pitch = _configData.Pitch;
 
             _currentChannel = _configData.Channel;
             if (_currentChannel == null)
@@ -52,19 +39,39 @@ namespace Rossoforge.Audio.Components
                 return;
             }
 
-            UpdateVolume(_currentChannel.Volume);
-            UpdateMuteState(_currentChannel.IsMuted);
+            SetClip();
+            SetPriority();
+            SetVolume(_currentChannel.Volume);
+            SetPitch();
+            SetMuteState(_currentChannel.IsMuted);
+            SetBypassEffects();
+            SetBypassListenerEffects();
+            SetBypassReverbZones();
+            SetLoop();
 
-            _currentChannel.OnVolumeChanged += UpdateVolume;
-            _currentChannel.OnMutedChanged += UpdateMuteState;
+            _currentChannel.OnVolumeChanged += SetVolume;
+            _currentChannel.OnMutedChanged += SetMuteState;
+
+            if (_configData.Autoplay)
+                _audioSource.Play();
         }
-        public void Cleanup()
+        private void Cleanup()
         {
             if (_currentChannel == null)
                 return;
 
-            _currentChannel.OnVolumeChanged -= UpdateVolume;
-            _currentChannel.OnMutedChanged -= UpdateMuteState;
-        }
+            _currentChannel.OnVolumeChanged -= SetVolume;
+            _currentChannel.OnMutedChanged -= SetMuteState;
+        }       
+
+        private void SetClip() => _audioSource.clip = _configData.Clip;
+        private void SetPriority() => _audioSource.priority = _configData.Priority;
+        private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Volume * channelVolume;
+        private void SetPitch() => _audioSource.pitch = _configData.Pitch;
+        private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Mute || isMuted;
+        private void SetBypassEffects() => _audioSource.bypassEffects = _configData.BypassEffects;
+        private void SetBypassListenerEffects() => _audioSource.bypassListenerEffects = _configData.BypassListenerEffects;
+        private void SetBypassReverbZones() => _audioSource.bypassReverbZones = _configData.BypassReverbZones;
+        private void SetLoop() => _audioSource.loop = _configData.Loop;
     }
 }
