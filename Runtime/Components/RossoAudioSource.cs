@@ -56,7 +56,7 @@ namespace Rossoforge.Audio.Components
             SetReverbZoneMix();
             SetDopplerLevel();
             SetSpread();
-            SetVolumeRolloff();
+            SetRolloffMode();
             SetMinDistance();
             SetMaxDistance();
 
@@ -109,7 +109,7 @@ namespace Rossoforge.Audio.Components
         private void SetReverbZoneMix() => _audioSource.reverbZoneMix = _configData.Spatial.ReverbZoneMix;
         private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.Spatial.DopplerLevel;
         private void SetSpread() => _audioSource.spread = _configData.Spatial.Spread;
-        private void SetVolumeRolloff() => _audioSource.rolloffMode = _configData.Spatial.VolumeRolloff;
+        private void SetRolloffMode() => _audioSource.rolloffMode = _configData.Spatial.RolloffMode;
         private void SetMinDistance()
         {
             if (_configData.Spatial.MinDistance > _configData.Spatial.MaxDistance)

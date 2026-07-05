@@ -75,7 +75,7 @@ namespace Rossoforge.Audio.Data
             public float Spread { get; private set; } = 0f;
 
             [field: SerializeField]
-            public AudioRolloffMode VolumeRolloff { get; private set; } = AudioRolloffMode.Logarithmic;
+            public AudioRolloffMode RolloffMode { get; private set; } = AudioRolloffMode.Logarithmic;
 
             [field: SerializeField]
             public float MinDistance { get; private set; } = 1f;
