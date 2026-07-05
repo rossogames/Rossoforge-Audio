@@ -40,9 +40,14 @@ namespace Rossoforge.Audio.Components
             }
 
             SetClip();
+
             SetPriority();
             SetVolume(_currentChannel.Volume);
             SetPitch();
+            SetStereoPan();
+            SetSpatialBlend();
+            SetReverbZoneMix();
+
             SetMuteState(_currentChannel.IsMuted);
             SetBypassEffects();
             SetBypassListenerEffects();
@@ -68,6 +73,10 @@ namespace Rossoforge.Audio.Components
         private void SetPriority() => _audioSource.priority = _configData.Priority;
         private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Volume * channelVolume;
         private void SetPitch() => _audioSource.pitch = _configData.Pitch;
+        private void SetStereoPan() => _audioSource.panStereo = _configData.StereoPan;
+        private void SetSpatialBlend() => _audioSource.spatialBlend = _configData.SpatialBlend;
+        private void SetReverbZoneMix() => _audioSource.reverbZoneMix = _configData.ReverbZoneMix;
+
         private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Mute || isMuted;
         private void SetBypassEffects() => _audioSource.bypassEffects = _configData.BypassEffects;
         private void SetBypassListenerEffects() => _audioSource.bypassListenerEffects = _configData.BypassListenerEffects;

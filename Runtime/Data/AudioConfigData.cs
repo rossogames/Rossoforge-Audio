@@ -24,6 +24,18 @@ namespace Rossoforge.Audio.Data
         [field: SerializeField]
         public float Pitch { get; private set; } = 1f;
 
+        [field: Range(-1f, 1f)]
+        [field: SerializeField]
+        public float StereoPan { get; private set; } = 0f;
+
+        [field: Range(0f, 1f)]
+        [field: SerializeField]
+        public float SpatialBlend { get; private set; } = 0f;
+
+        [field: Range(0f, 1.1f)]
+        [field: SerializeField]
+        public float ReverbZoneMix { get; private set; } = 1f;
+
         [field: SerializeField]
         public bool Mute { get; private set; } = false;
 
