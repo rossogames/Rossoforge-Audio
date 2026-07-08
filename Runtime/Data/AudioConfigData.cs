@@ -1,3 +1,4 @@
+using Rossoforge.Core.Audio;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -5,7 +6,7 @@ using UnityEngine.Audio;
 namespace Rossoforge.Audio.Data
 {
     [CreateAssetMenu(fileName = nameof(AudioConfigData), menuName = "Rossoforge/Audio/Audio Config Data")]
-    public class AudioConfigData : ScriptableObject
+    public class AudioConfigData : ScriptableObject, IAudioConfigData
     {
         [field: SerializeField]
         public AudioChannelData Channel { get; private set; }

@@ -3,7 +3,9 @@
     "rootNamespace": "Rossoforge.Audio",
     "references": [
         "Rossoforge.Core",
-        "Rossoforge.Utils"
+        "Rossoforge.Utils",
+        "Rossoforge.Services",
+        "Rossoforge.Pool"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

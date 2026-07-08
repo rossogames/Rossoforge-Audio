@@ -1,4 +1,4 @@
-using Rossoforge.Audio.Data;
+using Rossoforge.Pool.Data;
 using UnityEngine;
 
 namespace Rossoforge.Audio.Services
@@ -7,6 +7,6 @@ namespace Rossoforge.Audio.Services
     public class AudioServiceData : ScriptableObject
     {
         [field: SerializeField]
-        public AudioChannelData[] Channels { get; private set; }
+        public PooledGameobjectData AssetReference_GenericAudioSource { get; private set; }
     }
 }

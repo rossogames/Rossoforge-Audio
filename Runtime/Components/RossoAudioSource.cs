@@ -113,8 +113,11 @@ namespace Rossoforge.Audio.Components
         }
         private void UnregisterEvents()
         {
-            _currentChannel.OnVolumeChanged -= SetVolume;
-            _currentChannel.OnMutedChanged -= SetMuteState;
+            if(_currentChannel != null)
+            {
+                _currentChannel.OnVolumeChanged -= SetVolume;
+                _currentChannel.OnMutedChanged -= SetMuteState;
+            }
         }
         private void AutoPlay()
         {
