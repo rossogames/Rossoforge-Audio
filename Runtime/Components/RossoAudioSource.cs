@@ -1,4 +1,5 @@
 using Rossoforge.Audio.Data;
+using Rossoforge.Core.Audio;
 using Rossoforge.Utils.Logger;
 using UnityEngine;
 
@@ -8,11 +9,11 @@ namespace Rossoforge.Audio.Components
     public class RossoAudioSource : MonoBehaviour
     {
         [SerializeField]
-        private AudioConfigData _configData;
-        private AudioConfigData _lastAppliedConfig;
+        protected AudioConfigData _configData;
 
-        private AudioSource _audioSource;
+        private AudioConfigData _lastAppliedConfig;
         private AudioChannelData _currentChannel;
+        protected AudioSource _audioSource;
 
         private void Awake()
         {
@@ -20,16 +21,16 @@ namespace Rossoforge.Audio.Components
             _audioSource.playOnAwake = false;
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             Initialize();
         }
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             UnregisterEvents();
         }
 
-        private void Initialize()
+        protected void Initialize()
         {
             if (_configData == null)
                 return;

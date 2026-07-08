@@ -1,3 +1,4 @@
+using Rossoforge.Audio.Components;
 using Rossoforge.Audio.Data;
 using Rossoforge.Core.Audio;
 using Rossoforge.Core.Pool;
@@ -47,13 +48,14 @@ namespace Rossoforge.Audio.Services
 
         public void Play(IAudioConfigData config, Transform parent, Vector3 position, Space relativeTo)
         {
-            var obj = _poolService.Get(
+            var audioSource = _poolService.Get<RossoPooledAudioSource>(
                 _serviceData.AssetReference_GenericAudioSource,
                 parent,
                 position,
                 relativeTo
             );
 
+            audioSource.Play(config);
         }
     }
 }
