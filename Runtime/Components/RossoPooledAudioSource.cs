@@ -1,4 +1,3 @@
-using Rossoforge.Audio.Data;
 using Rossoforge.Core.Audio;
 
 namespace Rossoforge.Audio.Components
@@ -23,9 +22,9 @@ namespace Rossoforge.Audio.Components
             CheckIfFinished();
         }
 
-        public void Play(IAudioConfigData configData)
+        public void Play(AudioConfigData configData)
         {
-            _configData = configData as AudioConfigData;
+            _configData = configData;
             Initialize();
 
             _isTracking = _configData.Main.Autoplay && !_configData.Main.Loop;

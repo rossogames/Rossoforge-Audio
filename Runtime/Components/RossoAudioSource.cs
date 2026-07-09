@@ -8,7 +8,7 @@ namespace Rossoforge.Audio.Components
     [RequireComponent(typeof(AudioSource))]
     public class RossoAudioSource : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeReference]
         protected AudioConfigData _configData;
 
         private AudioConfigData _lastAppliedConfig;
@@ -42,8 +42,11 @@ namespace Rossoforge.Audio.Components
             if (!SetChannel())
                 return;
 
-            SetMixerGroup();
-            SetPriority();
+            if (_configData is IMixerAudioConfig mixerAudioConfig)
+                SetMixerGroup(mixerAudioConfig);
+
+            if (_configData is IPriorityAudioConfig priorityAudioConfig)
+                SetPriority(priorityAudioConfig);
 
             //--main--
             SetClip();
@@ -54,20 +57,25 @@ namespace Rossoforge.Audio.Components
             RegisterEvents();
 
             //--Spatial Settings--
-            SetSpatialBlend();
-            SetStereoPan();
-            SetReverbZoneMix();
-            SetDopplerLevel();
-            SetSpread();
-            SetRolloffMode();
-            SetMaxDistance();
-            SetMinDistance();
+            if (_configData is ISpatialAudioConfig spatialAudioConfig)
+            {
+                SetSpatialBlend(spatialAudioConfig);
+                SetStereoPan(spatialAudioConfig);
+                SetReverbZoneMix(spatialAudioConfig);
+                SetDopplerLevel(spatialAudioConfig);
+                SetSpread(spatialAudioConfig);
+                SetRolloffMode(spatialAudioConfig);
+                SetMaxDistance(spatialAudioConfig);
+                SetMinDistance(spatialAudioConfig);
+            }
 
             //--Bypass Settings--
-            SetBypassEffects();
-            SetBypassListenerEffects();
-            SetBypassReverbZones();
-
+            if (_configData is IBypassAudioConfig bypassAudioConfi)
+            {
+                SetBypassEffects(bypassAudioConfi);
+                SetBypassListenerEffects(bypassAudioConfi);
+                SetBypassReverbZones(bypassAudioConfi);
+            }
             AutoPlay();
 
             _lastAppliedConfig = _configData;
@@ -98,8 +106,8 @@ namespace Rossoforge.Audio.Components
 
             return true;
         }
-        private void SetMixerGroup() => _audioSource.outputAudioMixerGroup = _configData.MixerGroup;
-        private void SetPriority() => _audioSource.priority = _configData.Priority;
+        private void SetMixerGroup(IMixerAudioConfig mixerAudioConfig) => _audioSource.outputAudioMixerGroup = mixerAudioConfig.MixerGroup;
+        private void SetPriority(IPriorityAudioConfig priorityAudioConfig) => _audioSource.priority = priorityAudioConfig.Priority;
 
         //--main--
         private void SetClip() => _audioSource.clip = _configData.Main.Clip;
@@ -114,7 +122,7 @@ namespace Rossoforge.Audio.Components
         }
         private void UnregisterEvents()
         {
-            if(_currentChannel != null)
+            if (_currentChannel != null)
             {
                 _currentChannel.OnVolumeChanged -= SetVolume;
                 _currentChannel.OnMutedChanged -= SetMuteState;
@@ -127,37 +135,37 @@ namespace Rossoforge.Audio.Components
         }
 
         //--Spatial Settings--
-        private void SetSpatialBlend() => _audioSource.spatialBlend = _configData.Spatial.SpatialBlend;
-        private void SetStereoPan() => _audioSource.panStereo = _configData.Spatial.StereoPan;
-        private void SetReverbZoneMix() => _audioSource.reverbZoneMix = _configData.Spatial.ReverbZoneMix;
-        private void SetDopplerLevel() => _audioSource.dopplerLevel = _configData.Spatial.DopplerLevel;
-        private void SetSpread() => _audioSource.spread = _configData.Spatial.Spread;
-        private void SetRolloffMode()
+        private void SetSpatialBlend(ISpatialAudioConfig spatialAudioConfig) =>  _audioSource.spatialBlend = spatialAudioConfig.Spatial.SpatialBlend;
+        private void SetStereoPan(ISpatialAudioConfig spatialAudioConfig) => _audioSource.panStereo = spatialAudioConfig.Spatial.StereoPan;
+        private void SetReverbZoneMix(ISpatialAudioConfig spatialAudioConfig) => _audioSource.reverbZoneMix = spatialAudioConfig.Spatial.ReverbZoneMix;
+        private void SetDopplerLevel(ISpatialAudioConfig spatialAudioConfig) => _audioSource.dopplerLevel = spatialAudioConfig.Spatial.DopplerLevel;
+        private void SetSpread(ISpatialAudioConfig spatialAudioConfig) => _audioSource.spread = spatialAudioConfig.Spatial.Spread;
+        private void SetRolloffMode(ISpatialAudioConfig spatialAudioConfig)
         {
-            if (_configData.Spatial.RolloffMode == AudioRolloffMode.Custom)
+            if (spatialAudioConfig.Spatial.RolloffMode == AudioRolloffMode.Custom)
             {
                 RossoLogger.Warning($"AudioConfigData '{_configData.name}': Custom Rolloff mode is not supported without curves. Falling back to Logarithmic.");
                 _audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
             }
             else
             {
-                _audioSource.rolloffMode = _configData.Spatial.RolloffMode;
+                _audioSource.rolloffMode = spatialAudioConfig.Spatial.RolloffMode;
             }
         }
-        private void SetMinDistance()
+        private void SetMinDistance(ISpatialAudioConfig spatialAudioConfig)
         {
-            if (_configData.Spatial.MinDistance > _configData.Spatial.MaxDistance)
+            if (spatialAudioConfig.Spatial.MinDistance > spatialAudioConfig.Spatial.MaxDistance)
             {
                 RossoLogger.Error($"AudioConfigData '{_configData.name}': Min Distance must be less than Max Distance.");
                 return;
             }
-            _audioSource.minDistance = _configData.Spatial.MinDistance;
+            _audioSource.minDistance = spatialAudioConfig.Spatial.MinDistance;
         }
-        private void SetMaxDistance() => _audioSource.maxDistance = _configData.Spatial.MaxDistance;
+        private void SetMaxDistance(ISpatialAudioConfig spatialAudioConfig) => _audioSource.maxDistance = spatialAudioConfig.Spatial.MaxDistance;
 
         //--Bypass Settings--
-        private void SetBypassEffects() => _audioSource.bypassEffects = _configData.Bypass.Effects;
-        private void SetBypassListenerEffects() => _audioSource.bypassListenerEffects = _configData.Bypass.ListenerEffects;
-        private void SetBypassReverbZones() => _audioSource.bypassReverbZones = _configData.Bypass.ReverbZones;
+        private void SetBypassEffects(IBypassAudioConfig bypassAudioConfig) => _audioSource.bypassEffects = bypassAudioConfig.Bypass.Effects;
+        private void SetBypassListenerEffects(IBypassAudioConfig bypassAudioConfig) => _audioSource.bypassListenerEffects = bypassAudioConfig.Bypass.ListenerEffects;
+        private void SetBypassReverbZones(IBypassAudioConfig bypassAudioConfig) => _audioSource.bypassReverbZones = bypassAudioConfig.Bypass.ReverbZones;
     }
 }

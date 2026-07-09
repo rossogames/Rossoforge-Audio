@@ -1,5 +1,4 @@
 using Rossoforge.Audio.Components;
-using Rossoforge.Audio.Data;
 using Rossoforge.Core.Audio;
 using Rossoforge.Core.Pool;
 using Rossoforge.Core.Services;
@@ -24,7 +23,7 @@ namespace Rossoforge.Audio.Services
             _poolService = ServiceLocator.Get<IPoolService>();
         }
 
-        public void SetChannelVolume(IAudioChannelData channel, float volume)
+        public void SetChannelVolume(AudioChannelData channel, float volume)
         {
             if (channel == null)
             {
@@ -32,10 +31,10 @@ namespace Rossoforge.Audio.Services
                 return;
             }
 
-            channel.SetVolume(volume);
+            channel.Volume = volume;
         }
 
-        public void SetChannelMute(IAudioChannelData channel, bool isMuted)
+        public void SetChannelMute(AudioChannelData channel, bool isMuted)
         {
             if (channel == null)
             {
@@ -43,10 +42,10 @@ namespace Rossoforge.Audio.Services
                 return;
             }
 
-            channel.SetMute(isMuted);
+            channel.IsMuted = isMuted;
         }
 
-        public void Play(IAudioConfigData config, Transform parent, Vector3 position, Space relativeTo)
+        public void Play(AudioConfigData config, Transform parent, Vector3 position, Space relativeTo)
         {
             var audioSource = _poolService.Get<RossoPooledAudioSource>(
                 _serviceData.AssetReference_GenericAudioSource,
