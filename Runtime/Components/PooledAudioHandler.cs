@@ -31,7 +31,7 @@ namespace Rossoforge.Audio.Components
             if (_configData.Main.Loop)
             {
                 RossoLogger.Error($"{nameof(PooledAudioHandler)} cannot play the Config '{_configData.name}' because 'Loop' is enabled. One-Shot pooled sounds must not loop, as they will never return to the pool.");
-                return; 
+                return;
             }
 
             _isTracking = true;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Rossoforge.Audio.Components
 {
     [RequireComponent(typeof(AudioSource))]
-    public class AudioHandler : MonoBehaviour
+    public abstract class AudioHandler : MonoBehaviour
     {
         [SerializeReference]
         protected AudioConfigData _configData;
