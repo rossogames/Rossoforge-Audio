@@ -45,9 +45,9 @@ namespace Rossoforge.Audio.Services
             channel.IsMuted = isMuted;
         }
 
-        public void Play(AudioConfigData config, Transform parent, Vector3 position, Space relativeTo)
+        public void PlayOneShot(AudioConfigData config, Transform parent, Vector3 position, Space relativeTo)
         {
-            var audioSource = _poolService.Get<RossoPooledAudioSource>(
+            var audioSource = _poolService.Get<PooledAudioHandler>(
                 _serviceData.AssetReference_GenericAudioSource,
                 parent,
                 position,

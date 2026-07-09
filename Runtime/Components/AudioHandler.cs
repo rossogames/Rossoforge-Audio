@@ -1,4 +1,3 @@
-using Rossoforge.Audio.Data;
 using Rossoforge.Core.Audio;
 using Rossoforge.Utils.Logger;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine;
 namespace Rossoforge.Audio.Components
 {
     [RequireComponent(typeof(AudioSource))]
-    public class RossoAudioSource : MonoBehaviour
+    public class AudioHandler : MonoBehaviour
     {
         [SerializeReference]
         protected AudioConfigData _configData;
@@ -135,7 +134,7 @@ namespace Rossoforge.Audio.Components
         }
 
         //--Spatial Settings--
-        private void SetSpatialBlend(ISpatialAudioConfig spatialAudioConfig) =>  _audioSource.spatialBlend = spatialAudioConfig.Spatial.SpatialBlend;
+        private void SetSpatialBlend(ISpatialAudioConfig spatialAudioConfig) => _audioSource.spatialBlend = spatialAudioConfig.Spatial.SpatialBlend;
         private void SetStereoPan(ISpatialAudioConfig spatialAudioConfig) => _audioSource.panStereo = spatialAudioConfig.Spatial.StereoPan;
         private void SetReverbZoneMix(ISpatialAudioConfig spatialAudioConfig) => _audioSource.reverbZoneMix = spatialAudioConfig.Spatial.ReverbZoneMix;
         private void SetDopplerLevel(ISpatialAudioConfig spatialAudioConfig) => _audioSource.dopplerLevel = spatialAudioConfig.Spatial.DopplerLevel;

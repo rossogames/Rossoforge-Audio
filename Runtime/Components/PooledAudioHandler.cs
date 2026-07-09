@@ -2,7 +2,7 @@ using Rossoforge.Core.Audio;
 
 namespace Rossoforge.Audio.Components
 {
-    public class RossoPooledAudioSource : RossoAudioSource
+    public class PooledAudioHandler : AudioHandler
     {
         private bool _isTracking;
 
@@ -29,15 +29,15 @@ namespace Rossoforge.Audio.Components
 
             _isTracking = _configData.Main.Autoplay && !_configData.Main.Loop;
         }
- 
+
         private void CheckIfFinished()
         {
-            if (!_isTracking) 
+            if (!_isTracking)
                 return;
 
             if (!_audioSource.isPlaying)
             {
-                _isTracking = false; 
+                _isTracking = false;
                 gameObject.SetActive(false); // Return to pool
             }
         }
