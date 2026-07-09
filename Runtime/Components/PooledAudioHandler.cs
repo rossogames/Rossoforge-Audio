@@ -1,4 +1,5 @@
 using Rossoforge.Core.Audio;
+using Rossoforge.Utils.Logger;
 
 namespace Rossoforge.Audio.Components
 {
@@ -9,7 +10,7 @@ namespace Rossoforge.Audio.Components
         protected override void OnEnable()
         {
             // Do not call base.OnEnable() 
-            // Will be initialized by the pool service when spawned
+            // Will be initialized by the audio service after spawned
         }
         protected override void OnDisable()
         {
@@ -27,7 +28,16 @@ namespace Rossoforge.Audio.Components
             _configData = configData;
             Initialize();
 
-            _isTracking = _configData.Main.Autoplay && !_configData.Main.Loop;
+            if (_configData.Main.Loop)
+            {
+                RossoLogger.Error($"{nameof(PooledAudioHandler)} cannot play the Config '{_configData.name}' because 'Loop' is enabled. One-Shot pooled sounds must not loop, as they will never return to the pool.");
+                return; 
+            }
+
+            _isTracking = true;
+
+            if (!_configData.Main.Autoplay)
+                _audioSource.Play(); // Play the audio if Autoplay is disabled, since Initialize() will not play it automatically
         }
 
         private void CheckIfFinished()
