@@ -13,6 +13,34 @@
 **Version:** Unity 6 or higher
 
 #
+```csharp
+// Setup the Service Locator instance
+ServiceLocator.SetLocator(new DefaultServiceLocator());
+
+// Instantiate Core Services
+var eventService = new EventService();
+var poolService = new PoolService();
+var audioService = new AudioService(_audioServiceData); // Requires your AudioServiceData asset
+
+// Register Services to the Locator
+ServiceLocator.Register<IEventService>(eventService);
+ServiceLocator.Register<IPoolService>(poolService);
+ServiceLocator.Register<IAudioService>(audioService);
+
+// Initialize all registered services
+ServiceLocator.Initialize();
+
+// Pooled One-Shot audio
+_audioService = ServiceLocator.Get<IAudioService>();
+_audioService.PlayOneShot(_audioConfig, transform, transform.position, Space.World);
+
+// Audio channel control
+_audioService = ServiceLocator.Get<IAudioService>();
+_audioService.SetChannelVolume(_channel, volume);
+_audioService.SetChannelMute(_channel, isMuted);
+```
+
+#
 This package is part of the **Rossoforge** suite, designed to streamline and enhance Unity development workflows.
 
 Developed by Agustin Rosso
