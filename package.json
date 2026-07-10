@@ -1,16 +1,30 @@
 {
   "name": "com.rossogames.rossoforge-audio",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "displayName": "Rossoforge-Audio",
-  "description": "A lightweight and data-driven audio management system for RossoForge. Features decoupled audio channels and configuration-based audio sources",
+  "description": "A lightweight and data-driven audio management system for Rossoforge. Features decoupled audio channels and configuration-based audio sources",
   "unity": "2025.0",
   "author": {
     "name": "Agustin Rosso",
     "url": "https://www.linkedin.com/in/rossoagustin/"
   },
   "keywords": [
-    "core",
+    "audio",
+    "sound",
+    "music",
     "rossogames",
     "rossoforge"
+  ],
+  "samples": [
+    {
+      "displayName": "Pooled One-Shot Audio Setup",
+      "description": "Contains the core components required to initialize the pooled audio system. Includes the pre-configured PooledAudioHandler prefab and the PooledGameObjectData asset needed to associate the resource with the AudioServiceData.",
+      "path": "Samples~/PooledOneShot"
+    },
+    {
+      "displayName": "Audio System Demo",
+      "description": "A comprehensive demonstration scene that bootstraps the Audio Service. Features independent channel management (Music and SFX) with separate volume and mute controls, alongside a third transient sound that integrates with the object pool service to showcase short-lived audio playback.",
+      "path": "Samples~/AudioDemo"
+    }
   ]
 }

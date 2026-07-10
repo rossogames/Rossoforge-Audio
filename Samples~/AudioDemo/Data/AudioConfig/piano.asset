@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3ffb3b260206244928907b74d25af5, type: 3}
+  m_Name: piano
+  m_EditorClassIdentifier: Rossoforge.Audio::Rossoforge.Audio.Data.AudioConfigData
+  <Channel>k__BackingField: {fileID: 11400000, guid: 1988fd66249d0244485f1abcab6d1bc9, type: 2}
+  <Main>k__BackingField:
+    <Clip>k__BackingField: {fileID: 8300000, guid: b37f4099c97524b4fb48d34557f11234, type: 3}
+    <Volume>k__BackingField: 0.8
+    <Pitch>k__BackingField: 1
+    <Mute>k__BackingField: 0
+    <Loop>k__BackingField: 0
+    <Autoplay>k__BackingField: 0
+  <MixerGroup>k__BackingField: {fileID: 0}
+  <Priority>k__BackingField: 200
+  <Spatial>k__BackingField:
+    <SpatialBlend>k__BackingField: 0
+    <StereoPan>k__BackingField: 0
+    <ReverbZoneMix>k__BackingField: 1
+    <DopplerLevel>k__BackingField: 1
+    <Spread>k__BackingField: 0
+    <RolloffMode>k__BackingField: 0
+    <MinDistance>k__BackingField: 1
+    <MaxDistance>k__BackingField: 500
+  <Bypass>k__BackingField:
+    <Effects>k__BackingField: 0
+    <ListenerEffects>k__BackingField: 0
+    <ReverbZones>k__BackingField: 0
