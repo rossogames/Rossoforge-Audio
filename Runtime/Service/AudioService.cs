@@ -48,7 +48,7 @@ namespace Rossoforge.Audio.Services
         public void PlayOneShot(AudioConfigData config, Transform parent, Vector3 position, Space relativeTo)
         {
             var audioSource = _poolService.Get<PooledAudioHandler>(
-                _serviceData.AssetReference_GenericAudioSource,
+                _serviceData.AssetReferenceGenericAudioSource,
                 parent,
                 position,
                 relativeTo

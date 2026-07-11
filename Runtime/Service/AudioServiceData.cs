@@ -7,6 +7,6 @@ namespace Rossoforge.Audio.Services
     public class AudioServiceData : ScriptableObject
     {
         [field: SerializeField]
-        public PooledGameobjectData AssetReference_GenericAudioSource { get; private set; }
+        public PooledGameobjectData AssetReferenceGenericAudioSource { get; private set; }
     }
 }
