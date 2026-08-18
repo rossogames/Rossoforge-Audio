@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Rossoforge.Audio::Rossoforge.Audio.Data.AudioConfigData
   <Channel>k__BackingField: {fileID: 11400000, guid: 1988fd66249d0244485f1abcab6d1bc9, type: 2}
   <Main>k__BackingField:
-    <Clip>k__BackingField: {fileID: 8300000, guid: b37f4099c97524b4fb48d34557f11234, type: 3}
+    <AudioResource>k__BackingField: {fileID: 8300000, guid: b37f4099c97524b4fb48d34557f11234, type: 3}
     <Volume>k__BackingField: 0.8
     <Pitch>k__BackingField: 1
     <Mute>k__BackingField: 0

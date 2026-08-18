@@ -48,7 +48,7 @@ namespace Rossoforge.Audio.Components
                 SetPriority(priorityAudioConfig);
 
             //--main--
-            SetClip();
+            SetAudioResource();
             SetVolume(_currentChannel.Volume);
             SetPitch();
             SetMuteState(_currentChannel.IsMuted);
@@ -109,7 +109,7 @@ namespace Rossoforge.Audio.Components
         private void SetPriority(IPriorityAudioConfig priorityAudioConfig) => _audioSource.priority = priorityAudioConfig.Priority;
 
         //--main--
-        private void SetClip() => _audioSource.clip = _configData.Main.Clip;
+        private void SetAudioResource() => _audioSource.resource = _configData.Main.AudioResource;
         private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Main.Volume * channelVolume;
         private void SetPitch() => _audioSource.pitch = _configData.Main.Pitch;
         private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Main.Mute || isMuted;
