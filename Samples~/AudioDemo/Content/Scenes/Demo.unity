@@ -632,7 +632,7 @@ PrefabInstance:
     - target: {fileID: 7309271010090777786, guid: 1afd377e6c6754142aa48fccd467d8d3, type: 3}
       propertyPath: _channel
       value: 
-      objectReference: {fileID: 11400000, guid: a11ea33d40074ba41a55f343991a3ce8, type: 2}
+      objectReference: {fileID: 11400000, guid: fea2e1d1c7bf22e438f38c630e28afd8, type: 2}
     - target: {fileID: 7548371455258016797, guid: 1afd377e6c6754142aa48fccd467d8d3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1016,6 +1016,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1712294193491228070, guid: 5fd32b1b900107a4292404b3d1ab8e0c, type: 3}
       propertyPath: _configData
+      value: 
+      objectReference: {fileID: 11400000, guid: a3c1645c9438a5c4d91c8c02ac8cbbb9, type: 2}
+    - target: {fileID: 1712294193491228070, guid: 5fd32b1b900107a4292404b3d1ab8e0c, type: 3}
+      propertyPath: _audioDataConfig
       value: 
       objectReference: {fileID: 11400000, guid: a3c1645c9438a5c4d91c8c02ac8cbbb9, type: 2}
     - target: {fileID: 2077094732198669405, guid: 5fd32b1b900107a4292404b3d1ab8e0c, type: 3}
@@ -1604,6 +1608,10 @@ PrefabInstance:
       propertyPath: _configData
       value: 
       objectReference: {fileID: 11400000, guid: 7b8d73b23932b024e90da81d64482c9d, type: 2}
+    - target: {fileID: 1712294193491228070, guid: 5fd32b1b900107a4292404b3d1ab8e0c, type: 3}
+      propertyPath: _audioDataConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b8d73b23932b024e90da81d64482c9d, type: 2}
     - target: {fileID: 2077094732198669405, guid: 5fd32b1b900107a4292404b3d1ab8e0c, type: 3}
       propertyPath: m_Name
       value: AudioPlayer
@@ -2168,7 +2176,7 @@ PrefabInstance:
     - target: {fileID: 7309271010090777786, guid: 1afd377e6c6754142aa48fccd467d8d3, type: 3}
       propertyPath: _channel
       value: 
-      objectReference: {fileID: 11400000, guid: 1988fd66249d0244485f1abcab6d1bc9, type: 2}
+      objectReference: {fileID: 11400000, guid: 759a1a873bf0c2c4fa927f6e55d33e56, type: 2}
     - target: {fileID: 7548371455258016797, guid: 1afd377e6c6754142aa48fccd467d8d3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -1,4 +1,5 @@
-using Rossoforge.Core.Audio;
+using Rossoforge.Audio.DataConfig;
+using Rossoforge.Audio.Service;
 using Rossoforge.Services;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Rossoforge.Audio.Samples.Demo
 {
     public class AudioPanelDemo : MonoBehaviour
     {
-        public AudioChannelData _channel;
+        public AudioChannelDataConfig _channel;
 
         private IAudioService _audioService;
 

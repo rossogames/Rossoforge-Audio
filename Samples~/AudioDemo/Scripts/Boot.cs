@@ -1,5 +1,4 @@
-using Rossoforge.Audio.Services;
-using Rossoforge.Core.Audio;
+using Rossoforge.Audio.Service;
 using Rossoforge.Core.Events;
 using Rossoforge.Core.Pool;
 using Rossoforge.Events.Service;
@@ -12,7 +11,7 @@ namespace Rossoforge.Audio.Samples.Demo
     public class Boot : MonoBehaviour
     {
         [SerializeField]
-        private AudioServiceData _audioServiceData;
+        private AudioDataService _audioServiceData;
 
         private void Awake()
         {
