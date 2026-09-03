@@ -10,12 +10,12 @@ namespace Rossoforge.Audio.Service
 {
     public class AudioService : IAudioService, IInitializable
     {
-        private AudioDataService _serviceData;
+        private AudioDataService _dataService;
         private IPoolService _poolService;
 
-        public AudioService(AudioDataService serviceData)
+        public AudioService(AudioDataService dataService)
         {
-            _serviceData = serviceData;
+            _dataService = dataService;
         }
 
         public void Initialize()
@@ -48,7 +48,7 @@ namespace Rossoforge.Audio.Service
         public void PlayOneShot(AudioDataConfig config, Transform parent, Vector3 position, Space relativeTo)
         {
             var audioSource = _poolService.Get<PooledAudioHandler>(
-                _serviceData.AssetReferenceGenericAudioSource,
+                _dataService.AssetReferenceGenericAudioSource,
                 parent,
                 position,
                 relativeTo

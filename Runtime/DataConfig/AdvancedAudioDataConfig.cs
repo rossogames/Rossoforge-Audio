@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 
 namespace Rossoforge.Audio.DataConfig
 {
-    [CreateAssetMenu(fileName = nameof(AdvancedAudioDataConfig), menuName = "Rossoforge/Data Config/Audio/Advanced")]
+    [CreateAssetMenu(fileName = nameof(AdvancedAudioDataConfig), menuName = "Rossoforge/Data Config/Audio/Advanced Audio")]
     public class AdvancedAudioDataConfig : AudioDataConfig,
         IMixerAudioConfig,
         IPriorityAudioConfig,
