@@ -8,10 +8,10 @@ namespace Rossoforge.Audio.Components
     public abstract class AudioHandler : MonoBehaviour
     {
         [SerializeReference]
-        protected AudioConfigData _configData;
+        protected AudioDataConfig _configData;
 
-        private AudioConfigData _lastAppliedConfig;
-        private AudioChannelData _currentChannel;
+        private AudioDataConfig _lastAppliedConfig;
+        private AudioChannelDataConfig _currentChannel;
         protected AudioSource _audioSource;
 
         private void Awake()

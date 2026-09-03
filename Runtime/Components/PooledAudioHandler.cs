@@ -23,7 +23,7 @@ namespace Rossoforge.Audio.Components
             CheckIfFinished();
         }
 
-        public void Play(AudioConfigData configData)
+        public void Play(AudioDataConfig configData)
         {
             _configData = configData;
             Initialize();

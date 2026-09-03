@@ -3,10 +3,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Rossoforge.Audio.Data
+namespace Rossoforge.Audio.DataConfig
 {
-    [CreateAssetMenu(fileName = nameof(AdvancedAudioConfigData), menuName = "Rossoforge/Audio/Audio Config Data/Advanced")]
-    public class AdvancedAudioConfigData : AudioConfigData,
+    [CreateAssetMenu(fileName = nameof(AdvancedAudioDataConfig), menuName = "Rossoforge/Data Config/Audio/Advanced")]
+    public class AdvancedAudioDataConfig : AudioDataConfig,
         IMixerAudioConfig,
         IPriorityAudioConfig,
         ISpatialAudioConfig,
