@@ -1,7 +1,7 @@
 using Rossoforge.Pool.Data;
 using UnityEngine;
 
-namespace Rossoforge.Audio.Services
+namespace Rossoforge.Audio.Service
 {
     [CreateAssetMenu(fileName = nameof(AudioDataService), menuName = "Rossoforge/Data Service/Audio")]
     public class AudioDataService : ScriptableObject
