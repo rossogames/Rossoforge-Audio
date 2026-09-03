@@ -1,4 +1,4 @@
-using Rossoforge.Core.Audio;
+using Rossoforge.Audio.DataConfig;
 using Rossoforge.Utils.Logger;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Rossoforge.Audio.Components
     public abstract class AudioHandler : MonoBehaviour
     {
         [SerializeReference]
-        protected AudioDataConfig _configData;
+        protected AudioDataConfig _audioDataConfig;
 
         private AudioDataConfig _lastAppliedConfig;
         private AudioChannelDataConfig _currentChannel;
@@ -31,7 +31,7 @@ namespace Rossoforge.Audio.Components
 
         protected void Initialize()
         {
-            if (_configData == null)
+            if (_audioDataConfig == null)
                 return;
 
             if (CheckCurrentConfig())
@@ -41,10 +41,10 @@ namespace Rossoforge.Audio.Components
             if (!SetChannel())
                 return;
 
-            if (_configData is IMixerAudioConfig mixerAudioConfig)
+            if (_audioDataConfig is IMixerAudioConfig mixerAudioConfig)
                 SetMixerGroup(mixerAudioConfig);
 
-            if (_configData is IPriorityAudioConfig priorityAudioConfig)
+            if (_audioDataConfig is IPriorityAudioConfig priorityAudioConfig)
                 SetPriority(priorityAudioConfig);
 
             //--main--
@@ -56,7 +56,7 @@ namespace Rossoforge.Audio.Components
             RegisterEvents();
 
             //--Spatial Settings--
-            if (_configData is ISpatialAudioConfig spatialAudioConfig)
+            if (_audioDataConfig is ISpatialAudioConfig spatialAudioConfig)
             {
                 SetSpatialBlend(spatialAudioConfig);
                 SetStereoPan(spatialAudioConfig);
@@ -69,7 +69,7 @@ namespace Rossoforge.Audio.Components
             }
 
             //--Bypass Settings--
-            if (_configData is IBypassAudioConfig bypassAudioConfi)
+            if (_audioDataConfig is IBypassAudioConfig bypassAudioConfi)
             {
                 SetBypassEffects(bypassAudioConfi);
                 SetBypassListenerEffects(bypassAudioConfi);
@@ -77,12 +77,12 @@ namespace Rossoforge.Audio.Components
             }
             AutoPlay();
 
-            _lastAppliedConfig = _configData;
+            _lastAppliedConfig = _audioDataConfig;
         }
 
         private bool CheckCurrentConfig()
         {
-            if (_configData == _lastAppliedConfig && _currentChannel != null)
+            if (_audioDataConfig == _lastAppliedConfig && _currentChannel != null)
             {
                 SetVolume(_currentChannel.Volume);
                 SetMuteState(_currentChannel.IsMuted);
@@ -96,10 +96,10 @@ namespace Rossoforge.Audio.Components
         //--default--
         private bool SetChannel()
         {
-            _currentChannel = _configData.Channel;
+            _currentChannel = _audioDataConfig.Channel;
             if (_currentChannel == null)
             {
-                RossoLogger.Error($"AudioConfigData '{_configData.name}' missing required AudioChannelData reference on GameObject '{gameObject.name}'.");
+                RossoLogger.Error($"AudioConfigData '{_audioDataConfig.name}' missing required AudioChannelData reference on GameObject '{gameObject.name}'.");
                 return false;
             }
 
@@ -109,11 +109,11 @@ namespace Rossoforge.Audio.Components
         private void SetPriority(IPriorityAudioConfig priorityAudioConfig) => _audioSource.priority = priorityAudioConfig.Priority;
 
         //--main--
-        private void SetAudioResource() => _audioSource.resource = _configData.Main.AudioResource;
-        private void SetVolume(float channelVolume) => _audioSource.volume = _configData.Main.Volume * channelVolume;
-        private void SetPitch() => _audioSource.pitch = _configData.Main.Pitch;
-        private void SetMuteState(bool isMuted) => _audioSource.mute = _configData.Main.Mute || isMuted;
-        private void SetLoop() => _audioSource.loop = _configData.Main.Loop;
+        private void SetAudioResource() => _audioSource.resource = _audioDataConfig.Main.AudioResource;
+        private void SetVolume(float channelVolume) => _audioSource.volume = _audioDataConfig.Main.Volume * channelVolume;
+        private void SetPitch() => _audioSource.pitch = _audioDataConfig.Main.Pitch;
+        private void SetMuteState(bool isMuted) => _audioSource.mute = _audioDataConfig.Main.Mute || isMuted;
+        private void SetLoop() => _audioSource.loop = _audioDataConfig.Main.Loop;
         private void RegisterEvents()
         {
             _currentChannel.OnVolumeChanged += SetVolume;
@@ -129,7 +129,7 @@ namespace Rossoforge.Audio.Components
         }
         private void AutoPlay()
         {
-            if (_configData.Main.Autoplay)
+            if (_audioDataConfig.Main.Autoplay)
                 _audioSource.Play();
         }
 
@@ -143,7 +143,7 @@ namespace Rossoforge.Audio.Components
         {
             if (spatialAudioConfig.Spatial.RolloffMode == AudioRolloffMode.Custom)
             {
-                RossoLogger.Warning($"AudioConfigData '{_configData.name}': Custom Rolloff mode is not supported without curves. Falling back to Logarithmic.");
+                RossoLogger.Warning($"AudioConfigData '{_audioDataConfig.name}': Custom Rolloff mode is not supported without curves. Falling back to Logarithmic.");
                 _audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
             }
             else
@@ -155,7 +155,7 @@ namespace Rossoforge.Audio.Components
         {
             if (spatialAudioConfig.Spatial.MinDistance > spatialAudioConfig.Spatial.MaxDistance)
             {
-                RossoLogger.Error($"AudioConfigData '{_configData.name}': Min Distance must be less than Max Distance.");
+                RossoLogger.Error($"AudioConfigData '{_audioDataConfig.name}': Min Distance must be less than Max Distance.");
                 return;
             }
             _audioSource.minDistance = spatialAudioConfig.Spatial.MinDistance;

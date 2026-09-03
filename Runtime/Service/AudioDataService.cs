@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Rossoforge.Audio.Services
 {
-    [CreateAssetMenu(fileName = nameof(AudioDataService), menuName = "Rossoforge/Service Data/Audio")]
+    [CreateAssetMenu(fileName = nameof(AudioDataService), menuName = "Rossoforge/Data Service/Audio")]
     public class AudioDataService : ScriptableObject
     {
         [field: SerializeField]

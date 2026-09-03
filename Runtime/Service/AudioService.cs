@@ -1,12 +1,13 @@
 using Rossoforge.Audio.Components;
-using Rossoforge.Core.Audio;
+using Rossoforge.Audio.DataConfig;
+using Rossoforge.Audio.Services;
 using Rossoforge.Core.Pool;
 using Rossoforge.Core.Services;
 using Rossoforge.Services;
 using Rossoforge.Utils.Logger;
 using UnityEngine;
 
-namespace Rossoforge.Audio.Services
+namespace Rossoforge.Audio.Service
 {
     public class AudioService : IAudioService, IInitializable
     {
