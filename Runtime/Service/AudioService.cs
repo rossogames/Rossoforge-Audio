@@ -1,8 +1,8 @@
 using Rossoforge.Audio.Components;
 using Rossoforge.Audio.DataConfig;
-using Rossoforge.Core.Services;
 using Rossoforge.Pool.Service;
-using Rossoforge.Services;
+using Rossoforge.Services.Locator;
+using Rossoforge.Services.Service;
 using Rossoforge.Utils.Logger;
 using UnityEngine;
 
