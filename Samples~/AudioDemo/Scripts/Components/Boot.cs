@@ -1,8 +1,7 @@
 using Rossoforge.Audio.Service;
-using Rossoforge.Core.Events;
 using Rossoforge.Events.Service;
 using Rossoforge.Pool.Service;
-using Rossoforge.Services;
+using Rossoforge.Services.Locator;
 using UnityEngine;
 
 namespace Rossoforge.Audio.Samples.Demo
