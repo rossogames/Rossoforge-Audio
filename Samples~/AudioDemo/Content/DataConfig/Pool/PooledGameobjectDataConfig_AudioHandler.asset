@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f51f01d1743c85c47a879f3e022a5ac8, type: 3}
-  m_Name: PooledGameobjectData_AudioHandler
+  m_Name: PooledGameobjectDataConfig_AudioHandler
   m_EditorClassIdentifier: Rossoforge.Pool::Rossoforge.Pool.Data.PooledGameobjectData
-  <AssetReference>k__BackingField: {fileID: 5440154720297042503, guid: 44e7c202f74d6f84e8c4645d69efeedc, type: 3}
+  <AssetReference>k__BackingField: {fileID: 5440154720297042503, guid: fab6dbf47543fc142820f7644f5770b2, type: 3}
   <MaxSize>k__BackingField: 64

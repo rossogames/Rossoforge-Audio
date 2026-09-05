@@ -5,14 +5,14 @@ namespace Rossoforge.Audio.Components
         protected override void OnEnable()
         {
             base.OnEnable();
-            _configData.OnPlayRequested += OnPlayRequest;
-            _configData.OnStopRequested += OnStopRequest;
+            _audioDataConfig.OnPlayRequested += OnPlayRequest;
+            _audioDataConfig.OnStopRequested += OnStopRequest;
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            _configData.OnPlayRequested -= OnPlayRequest;
-            _configData.OnStopRequested -= OnStopRequest;
+            _audioDataConfig.OnPlayRequested -= OnPlayRequest;
+            _audioDataConfig.OnStopRequested -= OnStopRequest;
         }
 
         private void OnPlayRequest()

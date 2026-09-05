@@ -1,5 +1,6 @@
-using Rossoforge.Core.Audio;
-using Rossoforge.Services;
+using Rossoforge.Audio.DataConfig;
+using Rossoforge.Audio.Service;
+using Rossoforge.Services.Locator;
 using UnityEngine;
 
 namespace Rossoforge.Audio.Samples.Demo
@@ -7,7 +8,7 @@ namespace Rossoforge.Audio.Samples.Demo
     public class PooledAudioDemo : MonoBehaviour
     {
         [SerializeField]
-        private AudioConfigData _audioConfig;
+        private AudioDataConfig _audioConfig;
 
         private IAudioService _audioService;
 

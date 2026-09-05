@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2b0a902aa7b839429faa094fed130c4, type: 3}
-  m_Name: laser
+  m_Name: SimpleAudioDataConfig_laser
   m_EditorClassIdentifier: Rossoforge.Audio::Rossoforge.Audio.Data.SimpleAudioConfigData
-  <Channel>k__BackingField: {fileID: 11400000, guid: a11ea33d40074ba41a55f343991a3ce8, type: 2}
+  <Channel>k__BackingField: {fileID: 11400000, guid: fea2e1d1c7bf22e438f38c630e28afd8, type: 2}
   <Main>k__BackingField:
-    <Clip>k__BackingField: {fileID: 8300000, guid: 2ecebe95f72bfac4886c0f57432e9aba, type: 3}
+    <AudioResource>k__BackingField: {fileID: 8300000, guid: 2ecebe95f72bfac4886c0f57432e9aba, type: 3}
     <Volume>k__BackingField: 1
     <Pitch>k__BackingField: 1
     <Mute>k__BackingField: 0

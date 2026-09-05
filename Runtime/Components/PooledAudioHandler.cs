@@ -1,4 +1,4 @@
-using Rossoforge.Core.Audio;
+using Rossoforge.Audio.DataConfig;
 using Rossoforge.Utils.Logger;
 
 namespace Rossoforge.Audio.Components
@@ -23,20 +23,20 @@ namespace Rossoforge.Audio.Components
             CheckIfFinished();
         }
 
-        public void Play(AudioConfigData configData)
+        public void Play(AudioDataConfig dataConfig)
         {
-            _configData = configData;
+            _audioDataConfig = dataConfig;
             Initialize();
 
-            if (_configData.Main.Loop)
+            if (_audioDataConfig.Main.Loop)
             {
-                RossoLogger.Error($"{nameof(PooledAudioHandler)} cannot play the Config '{_configData.name}' because 'Loop' is enabled. One-Shot pooled sounds must not loop, as they will never return to the pool.");
+                RossoLogger.Error($"{nameof(PooledAudioHandler)} cannot play the Config '{_audioDataConfig.name}' because 'Loop' is enabled. One-Shot pooled sounds must not loop, as they will never return to the pool.");
                 return;
             }
 
             _isTracking = true;
 
-            if (!_configData.Main.Autoplay)
+            if (!_audioDataConfig.Main.Autoplay)
                 _audioSource.Play(); // Play the audio if Autoplay is disabled, since Initialize() will not play it automatically
         }
 

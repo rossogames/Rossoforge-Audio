@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3ffb3b260206244928907b74d25af5, type: 3}
-  m_Name: piano
+  m_Script: {fileID: 11500000, guid: d5248e56918003744917201818fd277c, type: 3}
+  m_Name: AdvancedAudioDataConfig_piano
   m_EditorClassIdentifier: Rossoforge.Audio::Rossoforge.Audio.Data.AudioConfigData
-  <Channel>k__BackingField: {fileID: 11400000, guid: 1988fd66249d0244485f1abcab6d1bc9, type: 2}
+  <Channel>k__BackingField: {fileID: 11400000, guid: 759a1a873bf0c2c4fa927f6e55d33e56, type: 2}
   <Main>k__BackingField:
-    <Clip>k__BackingField: {fileID: 8300000, guid: b37f4099c97524b4fb48d34557f11234, type: 3}
-    <Volume>k__BackingField: 0.8
+    <AudioResource>k__BackingField: {fileID: 8300000, guid: b37f4099c97524b4fb48d34557f11234, type: 3}
+    <Volume>k__BackingField: 1
     <Pitch>k__BackingField: 1
     <Mute>k__BackingField: 0
     <Loop>k__BackingField: 0
     <Autoplay>k__BackingField: 0
   <MixerGroup>k__BackingField: {fileID: 0}
-  <Priority>k__BackingField: 200
+  <Priority>k__BackingField: 128
   <Spatial>k__BackingField:
     <SpatialBlend>k__BackingField: 0
     <StereoPan>k__BackingField: 0
