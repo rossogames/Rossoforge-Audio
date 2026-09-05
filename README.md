@@ -20,7 +20,7 @@ ServiceLocator.SetLocator(new DefaultServiceLocator());
 // Instantiate Core Services
 var eventService = new EventService();
 var poolService = new PoolService();
-var audioService = new AudioService(_audioServiceData); // Requires your AudioServiceData asset
+var audioService = new AudioService(_audioDataService); // Requires your AudioDataService asset
 
 // Register Services to the Locator
 ServiceLocator.Register<IEventService>(eventService);
